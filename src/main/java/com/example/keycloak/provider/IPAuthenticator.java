@@ -1,18 +1,37 @@
 package com.example.keycloak.provider;
 
+import jakarta.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.core.Response;
 import org.jboss.logging.Logger;
 import org.keycloak.authentication.AuthenticationFlowContext;
 import org.keycloak.authentication.Authenticator;
-import org.keycloak.models.*;
-import org.keycloak.models.credential.OTPCredentialModel;
+import org.keycloak.authentication.authenticators.browser.UsernamePasswordForm;
+import org.keycloak.models.AuthenticatorConfigModel;
+import org.keycloak.models.KeycloakSession;
+import org.keycloak.models.RealmModel;
+import org.keycloak.models.UserModel;
 
 import java.util.Collections;
 import java.util.Map;
 
-public class IPAuthenticator implements Authenticator {
+public class IPAuthenticator extends UsernamePasswordForm implements Authenticator {
 
     private static final Logger logger = Logger.getLogger(IPAuthenticator.class);
     private static final String IP_BASED_OTP_CONDITIONAL_USER_ATTRIBUTE = "ip_based_otp_conditional";
+
+    @Override
+    public boolean validateUserAndPassword(AuthenticationFlowContext context, MultivaluedMap<String, String> inputData) {
+        logger.infof("INPUT ");
+        logger.infof("INPUT " + inputData.toString());
+        return super.validateUserAndPassword(context, inputData);
+    }
+
+    @Override
+    protected Response challenge(AuthenticationFlowContext context, MultivaluedMap<String, String> formData) {
+        logger.infof("FORM ");
+        logger.infof("FORM " + formData.toString());
+        return super.challenge(context, formData);
+    }
 
     @Override
     public void authenticate(AuthenticationFlowContext context) {
