@@ -13,12 +13,12 @@ import java.util.List;
 
 import static org.keycloak.provider.ProviderConfigProperty.STRING_TYPE;
 
-public class IPAuthenticatorFactory implements AuthenticatorFactory {
+public class DeviceIDAuthenticatorFactory implements AuthenticatorFactory {
 
-    public static final String ID = "ipauthenticator";
+    public static final String ID = "deviceidauthenticator";
 
-    private static final Authenticator AUTHENTICATOR_INSTANCE = new IPAuthenticator();
-    static final String ALLOWED_IP_ADDRESS_CONFIG = "allowed_ip_address";
+    private static final Authenticator AUTHENTICATOR_INSTANCE = new DeviceIDAuthenticator();
+    static final String ALLOWED_IP_ADDRESS_CONFIG = "allowed_device_id_valid";
 
     @Override
     public Authenticator create(KeycloakSession keycloakSession) {
@@ -27,7 +27,7 @@ public class IPAuthenticatorFactory implements AuthenticatorFactory {
 
     @Override
     public String getDisplayType() {
-        return "IP Authenticator";
+        return "Device ID Authenticator";
     }
 
     @Override
@@ -47,7 +47,7 @@ public class IPAuthenticatorFactory implements AuthenticatorFactory {
 
     @Override
     public String getHelpText() {
-        return "Limits access to only allowed IP Address";
+        return "Validate device id";
     }
 
     @Override
@@ -56,8 +56,8 @@ public class IPAuthenticatorFactory implements AuthenticatorFactory {
 
         name.setType(STRING_TYPE);
         name.setName(ALLOWED_IP_ADDRESS_CONFIG);
-        name.setLabel("IP Address from which sign ins are allowed");
-        name.setHelpText("Only accepts IP addresses, no CIDR nor masks nor ranges supported");
+        name.setLabel("Device ID from which sign ins are allowed");
+        name.setHelpText("Only accepts device id expected to user");
 
         return Collections.singletonList(name);
     }

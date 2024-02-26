@@ -1,2 +1,2 @@
-/Users/evandrojunior/study/keycloak/custom-provider-ck/src/main/java/com/example/keycloak/provider/IPAuthenticatorFactory.java
-/Users/evandrojunior/study/keycloak/custom-provider-ck/src/main/java/com/example/keycloak/provider/IPAuthenticator.java
+/Users/evandrojunior/study/keycloak/custom-provider-ck/src/main/java/com/example/keycloak/provider/DeviceIDAuthenticatorFactory.java
+/Users/evandrojunior/study/keycloak/custom-provider-ck/src/main/java/com/example/keycloak/provider/DeviceIDAuthenticator.java

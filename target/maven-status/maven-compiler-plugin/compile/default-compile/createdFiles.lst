@@ -1,2 +1,2 @@
-com/example/keycloak/provider/IPAuthenticator.class
-com/example/keycloak/provider/IPAuthenticatorFactory.class
+com/example/keycloak/provider/DeviceIDAuthenticator.class
+com/example/keycloak/provider/DeviceIDAuthenticatorFactory.class

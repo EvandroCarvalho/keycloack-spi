@@ -1,0 +1,10 @@
+curl --location 'http://0.0.0.0:8080/realms/master/protocol/openid-connect/token' \
+--header 'device-id: 123' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--header 'Authorization: Basic aGFwcHlAZXhhbXBsZS5jb206MTIzNDU=' \
+--data-urlencode 'grant_type=password' \
+--data-urlencode 'client_id=test' \
+--data-urlencode 'username=evandro' \
+--data-urlencode 'password=senha123' \
+--data-urlencode 'client_secret=Gq154OtqFtiYEtyv7yTDhoxbZ9ssQWVK' \
+--data-urlencode 'device-id=123'
