@@ -18,7 +18,6 @@ public class DeviceIDAuthenticatorFactory implements AuthenticatorFactory {
     public static final String ID = "deviceidauthenticator";
 
     private static final Authenticator AUTHENTICATOR_INSTANCE = new DeviceIDAuthenticator();
-    static final String ALLOWED_IP_ADDRESS_CONFIG = "allowed_device_id_valid";
 
     @Override
     public Authenticator create(KeycloakSession keycloakSession) {
@@ -52,14 +51,7 @@ public class DeviceIDAuthenticatorFactory implements AuthenticatorFactory {
 
     @Override
     public List<ProviderConfigProperty> getConfigProperties() {
-        ProviderConfigProperty name = new ProviderConfigProperty();
-
-        name.setType(STRING_TYPE);
-        name.setName(ALLOWED_IP_ADDRESS_CONFIG);
-        name.setLabel("Device ID from which sign ins are allowed");
-        name.setHelpText("Only accepts device id expected to user");
-
-        return Collections.singletonList(name);
+        return Collections.emptyList();
     }
 
     @Override

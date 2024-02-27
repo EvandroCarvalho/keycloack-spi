@@ -6,7 +6,6 @@ import org.jboss.logging.Logger;
 import org.keycloak.authentication.AuthenticationFlowContext;
 import org.keycloak.authentication.AuthenticationFlowError;
 import org.keycloak.authentication.Authenticator;
-import org.keycloak.events.Errors;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
@@ -17,23 +16,17 @@ public class DeviceIDAuthenticator implements Authenticator {
 
     @Override
     public void authenticate(AuthenticationFlowContext context) {
-        UserModel user = context.getUser();
+        final UserModel user = context.getUser();
 
-        logger.infof("FORM PARAM SIZE " + context.getHttpRequest().getMultiPartFormParameters().size());
-
-        MultivaluedMap<String, String> decodedFormParameters = context.getHttpRequest().getDecodedFormParameters();
+        final MultivaluedMap<String, String> decodedFormParameters = context.getHttpRequest().getDecodedFormParameters();
         logger.infof("FORM PARAM " + decodedFormParameters.toString());
 
-        String deviceId = decodedFormParameters.getFirst("device-id");
-
+        final String deviceId = decodedFormParameters.getFirst("device-id");
         logger.infof("ATTRIBUTES " + user.getAttributes().toString());
         logger.infof("DEVICE_ID " + user.getAttributes().get("device-id").get(0));
         if (!deviceId.equals(user.getAttributes().get("device-id").get(0))) {
             logger.error("DEVICE ID NOT MATCH");
-            var errorMessage = "Unauthorized";
-
-            var challengeResponse = context.form().setError(errorMessage)
-                    .createResponse(UserModel.RequiredAction.VERIFY_PROFILE);
+            var challengeResponse = Response.status(401).build();
             context.failureChallenge(AuthenticationFlowError.ACCESS_DENIED, challengeResponse);
             return;
         }
